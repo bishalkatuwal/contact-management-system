@@ -1,0 +1,311 @@
+{% extends 'base.html'%}
+{% block content%}
+
+
+
+
+<section id="header">
+    <!-- Search Bar -->
+    <form class="d-flex" role="search">
+        <input class="search-input" name="query" type="search" placeholder="Search contacts" aria-label="Search">
+      
+        <div class="dropdown">
+            {% if profile.user_image %}
+                <img src="{{ contact.user.profile.user_image.url }}" alt="Profile" class="dropdown-btn">
+            {% else %}
+                <div class="dropdown-btn">
+                    <img src="data:image/png;base64,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" alt="">
+                </div>
+            {% endif %}
+            <div class="dropdown-content">
+                <a href="{% url 'profile_detail' %}">My Profile</a>
+                <a href="{% url 'profile_edit' %}">Edit Profile</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
+
+
+
+    </form>
+{% if contacts %}
+    <!-- Contact List -->
+    <div class="contact-list">
+        {% for contact in object_list %}
+        <div class="contact-item">
+            <div class="contact-avatar">{{ contact.name|slice:":1" }}</div> <!-- Shows the first letter of the name -->
+                <div class="contact-details">
+                    <div class="contact-name">
+                        <a href="{% url 'contact-detail' contact.pk %}">{{ contact.name }}</a>
+                        <a href="{% url 'contact-delete' contact.pk %}" class="delete-link" title="Delete Contact">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                
+                <div class="contact-number">{{ contact.contact_number }}</div>
+            </div>
+        </div>
+        
+                {% endfor %}
+        {% else %}
+        <p>Empty</p>
+        {% endif %}
+    </div>
+
+    <!-- Add Contact Button -->
+    <a href="{% url 'add-contact' %}" class=" btn btn-primary">Add Contact</a>
+
+  
+</section>
+
+
+<style>
+    /* Main container styling */
+
+    #header {
+        max-width: 400px;
+        min-height: 90vh;
+        margin: 0 auto;
+        padding: 16px;
+        background:transparent;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    }
+
+    /* Search form styling */
+    .d-flex {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        padding: 8px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .d-flex input[type="search"] {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .d-flex button {
+        padding: 6px 12px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .d-flex button:hover {
+        background-color: #45A049;
+    }
+
+
+   /* Basic styling for the dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the button (the profile image or default avatar) */
+.dropdown-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #f0f0f0; /* Light background for default avatar */
+  transition: all 0.1s ease;
+}
+
+.dropdown-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dropdown-btn:hover {
+  background-color: #ddd; /* Slight hover effect */
+}
+
+/* Style the dropdown content (the links) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 40px; /* Adjust based on the button's height */
+  right: 0;
+  background-color: #fff;
+  min-width: 160px;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Display the dropdown content when hovering over the button */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Optional: Close the dropdown when clicking outside */
+body {
+  cursor: pointer;
+}
+
+body:focus {
+  outline: none;
+}
+
+    /* Contact list styling */
+    .contact-list {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-height: 400px; /* Set the maximum height for the contact list */
+        overflow-y: auto;  /* Enable vertical scrolling */
+    }
+
+    /* Each contact item styling */
+    .contact-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 8px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+
+    .contact-item:hover {
+        background-color: #e6e6e6;
+    }
+
+    /* Contact avatar styling */
+    .contact-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgb(43, 133, 43);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-weight: bold;
+        margin-right: 12px;
+        font-size: 16px;
+    }
+
+    /* Contact name and details styling */
+        .delete-link{
+        color: red; /* Red color */
+        margin-left: 9em;
+        text-decoration: none;
+        
+        
+    }
+
+    .delete-link:hover {
+        opacity: 0.8;
+    }
+
+    .contact-details {
+        flex-grow: 1;
+    }
+
+    .contact-name a{
+        font-size: 16px;
+        font-weight: 500;
+        color: black;
+        text-decoration: none;
+       
+    }
+
+    .contact-number {
+        font-size: 14px;
+        color: black;
+    }
+
+    /* Add Contact button styling */
+    .btn-primary {
+        padding: 8px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: rgb(43, 133, 43);;
+        border: none;
+        border-radius: 20px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: green;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 500px) {
+        #header {
+            padding: 12px;
+            width: 100%;
+        }
+
+        .d-flex {
+            gap: 8px;
+        }
+
+        .contact-avatar {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+        }
+
+        .contact-name {
+            font-size: 15px;
+        }
+
+        .contact-number {
+            font-size: 13px;
+        }
+    }
+</style>
+
+
+
+
+
+{% endblock %}

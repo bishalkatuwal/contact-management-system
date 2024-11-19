@@ -1,0 +1,76 @@
+{% extends 'base.html'%}
+{% block content %}
+
+    <section id="hero">
+        <div class="head">
+            <i class="fas fa-phone"></i>
+            <h2>Contacts</h2>
+        </div>
+
+        <a href="{% url 'contact-list' %}" class="btn btn-success" id="loadContactsBtn">Access Your Contact</a>
+        <div id="contactListContainer" class="contact-list-container">
+    </section>
+
+
+<style>
+    /* Styling for the hero section */
+#hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Full screen height */
+    background-color: #f7f7f7;  /* Light background color */
+    text-align: center;
+    padding: 20px;
+    background-image: url('data:image/jpeg;base64,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');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+
+}
+
+
+
+/* Styling for the heading section with the phone icon */
+.head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;  /* Adds space between the icon and the heading */
+}
+
+.head i {
+    font-size: 3rem;  /* Size of the phone icon */
+    color: #4CAF50;  /* Icon color */
+}
+
+.head h2 {
+    font-size: 2.5rem;  /* Size of the heading */
+    color: Black;  /* Dark color for the heading */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
+
+/* Styling for the 'Access Your Contact' button */
+#hero a {
+    background-color: #4CAF50;  /* Button color */
+    color: white;  /* Text color */
+    padding: 12px 25px;
+    border-radius: 30px;  /* Rounded corners */
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;  /* Smooth transition on hover */
+}
+
+/* Button hover effect */
+#hero a:hover {
+    background-color: #45a049;  /* Darker green on hover */
+}
+
+
+</style>
+{% endblock %}

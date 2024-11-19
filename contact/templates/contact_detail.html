@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="contact-card">
+    <h4>Contact Details</h4>
+
+    <!-- Display profile image if available -->
+    {% if contact.profile_image %}
+    <div class="contact-image">
+        <img src="{{ contact.profile_image.url }}" alt="{{ contact.name }}'s Profile Image" class="profile-img">
+    </div>
+    {% else %}
+    <div class="contact-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7kc4LWYMTgCvPRNPCDK99Vf0O1vggwWsgA&s" alt="{{ contact.name }}'s Profile Image" class="profile-img">
+    </div>
+    {% endif %}
+    <a href="{% url 'contact-update' contact.pk %}">Edit</a>
+    <!-- Display contact information -->
+    <div class="contact-info">
+        <p><strong>Name:</strong> {{ contact.name }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+        <p><strong>Phone:</strong> <a href="tel:{{ contact.phone }}">{{ contact.contact_number }}</a></p>
+    </div>
+
+    <!-- Action buttons with Font Awesome icons -->
+    <div class="contact-actions">
+        <a href="tel:{{ contact.phone }}" class="btn call-btn" aria-label="Call">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+        <a href="sms:{{ contact.phone }}" class="btn message-btn" aria-label="Message">
+            <i class="fas fa-comment-dots"></i>
+        </a>
+        <a href="mailto:{{ contact.email }}" class="btn email-btn" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+</div>
+
+
+<style>
+    .contact-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.contact-image {
+    margin-bottom: 15px;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.contact-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.call-btn {
+    background-color: #28a745;
+}
+
+.message-btn {
+    background-color: #ffc107;
+}
+
+.email-btn {
+    background-color: #dc3545;
+}
+
+</style>
+
+{% endblock %}
+
